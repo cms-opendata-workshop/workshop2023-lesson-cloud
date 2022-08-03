@@ -26,7 +26,6 @@ Current maintainers of this lesson are
 
 * FIXME
 * FIXME
-* FIXME
 
 
 ## Authors
