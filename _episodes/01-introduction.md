@@ -9,7 +9,10 @@ objectives:
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
-FIXME
+
+## Steps to access your  `cluster`
+
+
 
 {% include links.md %}
 
