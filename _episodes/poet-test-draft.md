@@ -57,7 +57,7 @@ The number of pods increases depending on how many files you are trying to run. 
 
 The first step is to get the record number or recid, which can be found in the end of the url of the dataset. For example, in the dataset shown below, the recid is 6004.
 
-![](../fig/RecidURL.png)
+![](../fig/RecidURL1.png)
 
 Each dataset must be done seperately, but all the files in a dataset can be run at the same time.  Next, take the record number use it to replace the existing value under recid in your yaml file.  
 
