@@ -11,7 +11,7 @@ FIXME: home page introduction
 
 > ## Prerequisites
 >
-> FIXME
+> For this lesson we will be using GCP, Argo and Kubectl, of which you should be familiar with if you went over the cloud pre-exercises. 
 {: .prereq}
 
 {% include links.md %}
