@@ -49,6 +49,7 @@ The fifth template uses scattering to run the analysis.  It runs the code specif
 
 ![](../fig/CompletePoetTest.png)
 ![](../fig/poet-test12.PNG)
+![](../fig/poet-test13.png)
 ![](../fig/poet-test2.png)
 ![](../fig/poet-test21.png)
 
