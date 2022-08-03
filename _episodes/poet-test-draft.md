@@ -49,8 +49,6 @@ The fifth template uses scattering to run the analysis.  It runs the code specif
 
 ![](../fig/CompletePoetTest.png)
 ![](../fig/poet-test12.PNG)
-![](../fig/poet-test13.png)
-![](../fig/poet-test2.png)
 ![](../fig/poet-test21.png)
 
 The number of pods increases depending on how many files you are trying to run. Depending on the resources you allocate to you cluster, there is a limit to the number of pods you have running at one time.  If you have more pods than this number, they will wait for eachother to complete.  
