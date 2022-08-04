@@ -20,6 +20,8 @@ For the CMS-Workshop 2022 we have added you to a GCP project where we will provi
 ![](../fig/gcp2.PNG)
 
 * Find the number of your cluster [here](https://docs.google.com/spreadsheets/d/1WcLSAMNPW7tUKqr0ieA202vVgjAPFnGIIhZ3dhs38LM/edit?usp=sharing)
+* [Resize](https://cloud.google.com/kubernetes-engine/docs/how-to/resizing-a-cluster) your cluster to ```4 nodes```
+
 * Connect to your cluster in cloud shell
 
 ### Get your services
