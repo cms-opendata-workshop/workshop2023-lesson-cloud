@@ -92,7 +92,7 @@ All of the parameters in arguments can be changed depending on the analysis bein
 After the yaml file has been edited, run the workflow with the following command. Remember to change nfs-<ID> to your ID number.
 
 ```bash
-argo submit -n argo workshop_argo.yaml --watch
+argo submit -n argo argo-poet-ttbar.yaml --watch
 ```
 
 You can watch it's progress either on the command line or in the Argo GUI.  When it has finished, you will be able to access the output files by using the commands:
