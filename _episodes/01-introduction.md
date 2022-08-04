@@ -18,7 +18,7 @@ For the CMS-Workshop 2022 we have added you to a GCP project where we will provi
 * Go to the [Google Cloud Console](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiT1aCX6av5AhWKtYQIHYGlASQQjBB6BAgEEAE&url=https%3A%2F%2Fconsole.cloud.google.com%2F%3Fhl%3Des&usg=AOvVaw32wCy6el4RVbIZO1m5wyNI) and login with your google account.
 * Change to the CMS-opendata Project 
 ![](../fig/gcp.PNG)
-
+![](../fig/gcp2.PNG)
 
 * Find the number of your cluster [here](https://docs.google.com/spreadsheets/d/1WcLSAMNPW7tUKqr0ieA202vVgjAPFnGIIhZ3dhs38LM/edit?usp=sharing)
 * Connect to your cluster in cloud shell
