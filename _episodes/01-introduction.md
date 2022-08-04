@@ -17,10 +17,11 @@ keypoints:
 For the CMS-Workshop 2022 we have added you to a GCP project where we will provide temporary resources to run an Argo Workflow. Before we get into details please follow the following steps to get things started!
 
 * Go to the [Google Cloud Console](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiT1aCX6av5AhWKtYQIHYGlASQQjBB6BAgEEAE&url=https%3A%2F%2Fconsole.cloud.google.com%2F%3Fhl%3Des&usg=AOvVaw32wCy6el4RVbIZO1m5wyNI) and login with your google account.
-* Verify that you are in the [CMS-opendata Project](https://console.cloud.google.com/welcome?project=cms-opendata)
+* Verify that you are in the [CMS-opendata Project](https://console.cloud.google.com/welcome?project=cms-opendata).
 ![](../fig/gcp2.PNG)
-* Go the Kubernetes enegines cluster listing from the Navigation menu top left, scroll down to "Kubernetes engine" and select "CLusters"
-* Find the number of your cluster in the email you have received
+* Go the Kubernetes engines cluster listing from the Navigation menu top left, scroll down to "Kubernetes engine" and select "Clusters".
+![](../fig/gcp3.PNG)
+* Find the number of your cluster in the email you have received and select your cluster in the list
 * [Resize](https://cloud.google.com/kubernetes-engine/docs/how-to/resizing-a-cluster) your cluster to ```4 nodes```. 
 * Connect to your cluster in cloud shell
 
