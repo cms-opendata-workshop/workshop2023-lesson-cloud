@@ -25,16 +25,16 @@ For the CMS-Workshop 2022 we have added you to a GCP project where we will provi
 * Find the number of your cluster in the email you have received and select your cluster in the list.
 
 ### Resize your cluster
-* The cluster has been created with one node only to limit the costs. Now as you start using the cluster, [resize](https://cloud.google.com/kubernetes-engine/docs/how-to/resizing-a-cluster) your cluster to ```4 nodes```:
-  * Click on the three vertical dots after your cluster name and select "Edit".
+The cluster has been created with one node only to limit the costs. Now as you start using the cluster, [resize](https://cloud.google.com/kubernetes-engine/docs/how-to/resizing-a-cluster) your cluster to ```4 nodes```:
+* Click on the three vertical dots after your cluster name and select "Edit".
 ![](../fig/gke1.png)
-  * Choose Nodes.
+* Choose Nodes.
 ![](../fig/gke2.png)
-  * Then click on the Node pools name "terraform...".
+* Then click on the Node pools name "terraform...".
 ![](../fig/gke3.png)
-  * Select "Resize".
+* Select "Resize".
 ![](../fig/gke4.png)
-  * Set the number of nodes to 4.
+* Set the number of nodes to 4.
 ![](../fig/gke5.png)
 
 ### Connect to the cluster
