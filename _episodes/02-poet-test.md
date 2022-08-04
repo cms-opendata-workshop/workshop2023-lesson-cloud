@@ -16,30 +16,27 @@ keypoints:
 
 ## Expanding the Yaml File
 
-Now we are going to run a serious workflow.  We will be mimicing a full analysis workflow by going through a more complex and complete workflow.
-In order to run an analysis on multiple datasets, some changes have to be made to the structure of the yaml file.  First, download the yaml file with:
+In the previous section, you downloaded a workflow definition and submitted it. It should be now running. This workflow corresponds to the analysis example presented in this workshop.
 
-```bash
-wget https://raw.githubusercontent.com/cms-opendata-analyses/PhysObjectExtractorTool/odws2022-ttbaljets-prod/PhysObjectExtractor/cloud/argo-poet-ttbar.yaml
-```
+The workflow mimicks a full analysis, first processing CMS open data samples with POET and then running analysis script on the ouput files.
 
-Open up the file, and take a look through its contents. Below is an explanation of the major changes compaired to the previous workflows you have run.
+Open up the file `argo-poet-ttbar.yaml`, and take a look through its contents. Below is an explanation of the major steps.
 
-Instead of having one task that runs when the workflow is submitted, argo-poet-ttbar.yaml calls and runs multiple different tasks. The file is broken up into different templates.  
+`argo-poet-ttbar.yaml` calls and runs multiple different tasks. The file is broken up into different templates.  
 
 1. "argo-poet", the first template, is the entrypoint, and it contains the outline for the rest of the workflow.
 
 2. "prepare-template" gets the directories ready for other workflow steps.  
 
-3. "filelist-template" makes a text file containing all the files that are going to be processed by the workflow.  
+3. "filelist-template" uses `cernopendata-client` to get all files of the datasets.  
 
 4. "runpoet-template" processes the data, and it will take the longest amount of time to complete.  
 
-5. "flattentrees-template" combines the multiple outputs files from the processing in one file.  
+5. "flattentrees-template" combines the separate "branches" of the POET output ROOT file to one "Events" branch.  
 
-6. "preparecoffea-template" prepares some histograms using the output file from the merge step.  
+6. "preparecoffea-template" prepares the input to the analysis steps.  
 
-7. "runcoffea-template" 
+7. "runcoffea-template" runs the analysis.
 
 The first template must have the same name as the the entrypoint value, which is declared close to the top of the file.  Under the `dag` section of the first template, it calls other templates that are defined below.  It also contains information such as arguments to pass into each of these sections and dependencies that ensure the templates are run in the correct order.
 
@@ -49,13 +46,13 @@ The fifth template uses scattering to run the analysis.  It runs the code specif
 
 Depending on the resources you allocate to you cluster, there is a limit to the number of pods you have running at one time.  If you have more pods than this number, they will wait for eachother to complete.  
 
-## Accessing and Using Data Sets
+## Accessing and using datasets
 
-The first step is to get the record number or recid, which can be found in the end of the url of the dataset. For example, in the dataset shown below, the [recid is 24119](https://opendata.cern.ch/record/24119).
+Tho access the dataset file listing you will need its record number or `recid`, which can be found in the end of the url of the dataset on the CERN Open data portal. For example, in the dataset shown below, the [recid is 24119](https://opendata.cern.ch/record/24119).
 
 ![](../fig/RecidURL2.png)
 
-Each dataset must be done seperately, but all the files in a dataset can be run at the same time.
+The workflow takes the following parameters:
 
 ```yaml
 arguments:
@@ -82,19 +79,30 @@ parameters:
         value: 1
 ```
 
-All of the parameters in arguments can be changed depending on the analysis being done.  
-- processName is used in the name of the output file
-- firstFile selects which file to start with, and it starts with 1.  
-- nFiles is the number of files you want to process. 
-- nEvents is the maximum number of events you want it to process. If you want it to run over all of the events, set it to -1.  
+They give the input to the workflow steps.  
+- `nFiles` is the number of files in each dataset you want to process. It is limited to 2 in this workflow. In real analysis you would run over all files.
+- `recid` is the list of dataset to be processed.
+- `nJobs` is one (to use it properly, the workflow definition will need to be updated).
 
-After the yaml file has been edited, run the workflow with the following command. Remember to change nfs-<ID> to your ID number.
+You can watch the progress of the workflow either on the command line or in the Argo GUI.  
+
+On the command line, you can see the state of the workflow with
 
 ```bash
-argo submit -n argo argo-poet-ttbar.yaml --watch
+argo get @latest -n argo
 ```
 
-You can watch it's progress either on the command line or in the Argo GUI.  When it has finished, you will be able to access the output files by using the commands:
+and you can check the logs with
+
+```bash
+argo logs @latest -n argo
+```
 
 
-There are many different ways to use a workflow, and they can be customized to fit a variety of needs.  Now you are able to edit a yaml file to perform a full analysis flow.
+When it has finished, you will be able to access the output files from the http file server. You can also see the contents of the disk with
+
+```bash
+kubectl exec pv-pod -n argo -- ls /mnt/data
+```
+
+Note that this is just an example workflow for demonstration purposes. The workflows can be customized to fit a variety of needs.  Now you are able to edit a yaml file to perform a full analysis flow.
