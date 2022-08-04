@@ -17,7 +17,7 @@ For the CMS-Workshop 2022 we have added you to a GCP project where we will provi
 
 * Go to the [Google Cloud Console](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiT1aCX6av5AhWKtYQIHYGlASQQjBB6BAgEEAE&url=https%3A%2F%2Fconsole.cloud.google.com%2F%3Fhl%3Des&usg=AOvVaw32wCy6el4RVbIZO1m5wyNI) and login with your google account.
 * Change to the CMS-opendata Project 
-* Find your cluster here - FIXME
+* Find your cluster here
 * Connect to your cluster in cloud shell
 
 ### Get your services
@@ -30,12 +30,17 @@ kubectl get svc -n argo
 ```
 
 * Argo GUI (```argo-server-<NUMBER>```)
-In a new tab open the follwoing address, replace with corresponding external IP as follows:
-```https://<EXTERNAL-IP>:2746```
+In a new tab open the following address, replace with corresponding external IP as follows:
+
+```Web Address (URL)
+https://<EXTERNAL-IP>:2746
+```
 
 * Http File Server (```http-fileserver-<NUMBER>```)
-In a new tab open the follwoing address, replace with corresponding external IP as follows:
-```<EXTERNAL-IP>```
+In a new tab open the following address, no need to add anything, just paste the external IP as follows:
+```Web Address (URL)
+<EXTERNAL-IP>
+```
 
 ### Argo
 Argo is already installed! To make it executable download the binary and move it to it's respective path with the following commands:
