@@ -69,6 +69,10 @@ wget https://raw.githubusercontent.com/cms-opendata-analyses/PhysObjectExtractor
 
 The workflow defines the persistent volume in which the output is stored. Edit the workflow to replace `<NUMBER>` to correspond to your cluster number. 
 
+```bash
+nano argo-poet-ttbar.yaml
+```
+
 Then submit the workflow with
 
 ```bash
