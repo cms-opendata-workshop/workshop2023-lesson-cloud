@@ -16,32 +16,30 @@ keypoints:
 
 ## Expanding the Yaml File
 
-Now we are going to run a serious workflow.  We will be mimicing a full analysis flow by going through a more complex and complete workflow.
-
+Now we are going to run a serious workflow.  We will be mimicing a full analysis workflow by going through a more complex and complete workflow.
 In order to run an analysis on multiple datasets, some changes have to be made to the structure of the yaml file.  First, download the yaml file with:
 
 ```bash
-https://raw.githubusercontent.com/cms-opendata-analyses/PhysObjectExtractorTool/odws2022-ttbaljets-prod/PhysObjectExtractor/cloud/argo-poet-ttbar.yaml
+wget https://raw.githubusercontent.com/cms-opendata-analyses/PhysObjectExtractorTool/odws2022-ttbaljets-prod/PhysObjectExtractor/cloud/argo-poet-ttbar.yaml
 ```
-This file needs to be updated. I have the updated version, it just needs to be pushed to the github.
 
-Open up the file, and take a look through its contents.  Below is an explanation of the major changes compaired to the previous workflows you have run.
+Open up the file, and take a look through its contents. Below is an explanation of the major changes compaired to the previous workflows you have run.
 
-Instead of having one task that runs when the workflow is submitted, workshop_argo.yaml calls and runs multiple different tasks.  The file is broken up into different templates.  
+Instead of having one task that runs when the workflow is submitted, argo-poet-ttbar.yaml calls and runs multiple different tasks. The file is broken up into different templates.  
 
-1. "example", the first template, is the entrypoint, and it contains the outline for the rest of the workflow.
+1. "argo-poet", the first template, is the entrypoint, and it contains the outline for the rest of the workflow.
 
 2. "prepare-template" gets the directories ready for other workflow steps.  
 
-3. "write-files-step-template" makes a text file containing all the files that are going to be processed by the workflow.  
+3. "filelist-template" makes a text file containing all the files that are going to be processed by the workflow.  
 
-4. "gen-list-template" sets up the iterator list.  
+4. "runpoet-template" processes the data, and it will take the longest amount of time to complete.  
 
-5. "scatter-step-template" processes the data, and it will take the longest amount of time to complete.  
+5. "flattentrees-template" combines the multiple outputs files from the processing in one file.  
 
-6. "merge-step-template" combines the multiple outputs files from the processing in one file.  
+6. "preparecoffea-template" prepares some histograms using the output file from the merge step.  
 
-7. "eventloop-analysis-step-template" prepares some histograms using the output file from the merge step.  
+7. "runcoffea-template" 
 
 The first template must have the same name as the the entrypoint value, which is declared close to the top of the file.  Under the `dag` section of the first template, it calls other templates that are defined below.  It also contains information such as arguments to pass into each of these sections and dependencies that ensure the templates are run in the correct order.
 
@@ -49,14 +47,15 @@ The fifth template uses scattering to run the analysis.  It runs the code specif
 
 ![](../fig/poet-test3.PNG)
 
-The number of pods increases depending on how many files you are trying to run. Depending on the resources you allocate to you cluster, there is a limit to the number of pods you have running at one time.  If you have more pods than this number, they will wait for eachother to complete.  
+Depending on the resources you allocate to you cluster, there is a limit to the number of pods you have running at one time.  If you have more pods than this number, they will wait for eachother to complete.  
 
 ## Accessing and Using Data Sets
 
-The first step is to get the record number or recid, which can be found in the end of the url of the dataset. For example, in the dataset shown below, the recid is 24119.
+The first step is to get the record number or recid, which can be found in the end of the url of the dataset. For example, in the dataset shown below, the [recid is 24119](https://opendata.cern.ch/record/24119).
 
 ![](../fig/RecidURL2.png)
-Each dataset must be done seperately, but all the files in a dataset can be run at the same time.  Next, take the record number use it to replace the existing value under recid in your yaml file.  
+
+Each dataset must be done seperately, but all the files in a dataset can be run at the same time.
 
 ```yaml
 arguments:
