@@ -13,7 +13,10 @@ If you run into problems with any of these steps, please reach out to the organi
 
 > ## Prerequisites
 >
-> For this lesson we will be using GCP, Argo and Kubectl, of which you should be familiar with if you went over the cloud pre-exercises. 
+> For this lesson we will running [Argo Workflows](https://argoproj.github.io/workflows/) and 
+> [Kubernetes](https://kubernetes.io) in [GCP](https://cloud.google.com), 
+> of which you should be familiar with if you went over the 
+> cloud [pre-exercises](https://cms-opendata-workshop.github.io/workshop2022-lesson-introcloud/).
 {: .prereq}
 
 {% include links.md %}
