@@ -29,18 +29,11 @@ To get the external IP of both the `Argo GUI` and the `http server` run the foll
 kubectl get svc -n argo
 ```
 
-* Argo GUI (```argo-server-<NUMBER>```)
-In a new tab open the following address, replace with corresponding external IP as follows:
+* Argo GUI
+In a new tab open the following address, replace with corresponding external IP in a Web Address (URL) as follows: ```https://<EXTERNAL-IP>:2746```
 
-```Web Address (URL)
-https://<EXTERNAL-IP>:2746
-```
-
-* Http File Server (```http-fileserver-<NUMBER>```)
-In a new tab open the following address, no need to add anything, just paste the external IP as follows:
-```Web Address (URL)
-<EXTERNAL-IP>
-```
+* Http File Server
+In a new tab open the following address, no need to add anything, just paste the external IP in a Web Address (URL) as follows: ```<EXTERNAL-IP>```
 
 ### Argo
 Argo is already installed! To make it executable download the binary and move it to it's respective path with the following commands:
