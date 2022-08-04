@@ -79,20 +79,22 @@ argo get @latest -n argo
 ### Get your services
 Your cluster has been built altogether with [Terraform](https://www.terraform.io), including all the configurations seen in the [cloud pre-exercises](https://cms-opendata-workshop.github.io/workshop2022-lesson-introcloud/). 
 
-To get the external IP of both the `Argo GUI` with which you can follow the workflow and the `http server` trhough which you can download the ouputs run the following command:
+To get the external IP of both the `Argo GUI` (with which you can follow the workflow) and the `http server` (through which you can download the ouputs), run the following command:
 
 ```bash
 kubectl get svc -n argo
 ```
 
-* Argo GUI
-In a new tab open the following address, replace with corresponding external IP in a Web Address (URL) as follows: ```https://<EXTERNAL-IP>:2746```
+## Argo GUI
+In a new tab open ```https://<EXTERNAL-IP>:2746```, replacing `<EXTERNAL-IP> with corresponding external IP of your `argo-server-N` from the ouput of the command above.
 
-* Http File Server
-In a new tab open the following address, no need to add anything, just paste the external IP in a Web Address (URL) as follows: ```<EXTERNAL-IP>```
+## Http File Server
+In a new tab open ```<EXTERNAL-IP>```, no need to add anything, just paste the external IP of your `http-fileserver-N` from the ouput of the command above.
 
 
-OK! Let's go to see the details...
+### Next
+
+OK, we got it running! Now let's go to see the details...
 
 {% include links.md %}
 
