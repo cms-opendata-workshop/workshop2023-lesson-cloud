@@ -1,7 +1,7 @@
 ---
 title: "Demo: Run a Full Analysis Flow"
-teaching: 0
-exercises: 0
+teaching: 20
+exercises: 45
 questions:
 - "How do I run an analysis on multiple datasets?"
 - "How can I change a yaml file to fit different processing needs?"
@@ -21,7 +21,7 @@ Now we are going to run a serious workflow.  We will be mimicing a full analysis
 In order to run an analysis on multiple datasets, some changes have to be made to the structure of the yaml file.  First, download the yaml file with:
 
 ```bash
-wget https://raw.githubusercontent.com/cms-opendata-workshop/workshop2021-poetpayload-cloud/master/PhysObjectExtractor/cloud/workshop_argo.yaml
+https://raw.githubusercontent.com/cms-opendata-analyses/PhysObjectExtractorTool/odws2022-ttbaljets-prod/PhysObjectExtractor/cloud/argo-poet-ttbar.yaml
 ```
 This file needs to be updated. I have the updated version, it just needs to be pushed to the github.
 
@@ -47,32 +47,40 @@ The first template must have the same name as the the entrypoint value, which is
 
 The fifth template uses scattering to run the analysis.  It runs the code specified within in mutliple pods at the same time.  The Argo GUI helps us visualize this process.
 
-![](../fig/CompletePoetTest.png)
 ![](../fig/poet-test12.PNG)
-![](../fig/poet-test21.png)
 
 The number of pods increases depending on how many files you are trying to run. Depending on the resources you allocate to you cluster, there is a limit to the number of pods you have running at one time.  If you have more pods than this number, they will wait for eachother to complete.  
 
 ## Accessing and Using Data Sets
 
-The first step is to get the record number or recid, which can be found in the end of the url of the dataset. For example, in the dataset shown below, the recid is 6004.
+The first step is to get the record number or recid, which can be found in the end of the url of the dataset. For example, in the dataset shown below, the recid is 24119.
 
 ![](../fig/RecidURL2.png)
 Each dataset must be done seperately, but all the files in a dataset can be run at the same time.  Next, take the record number use it to replace the existing value under recid in your yaml file.  
 
 ```yaml
 arguments:
-    parameters:
-    - name: processName                                  
-      value: 'DoubleMuParked'
-    - name: firstFile                                  
-      value: 3
-    - name: nFiles                               
-      value: 4
-    - name: nEvents                               
-      value: 1
-    - name: recid
-      value: 6004 
+parameters:
+      - name: nFiles
+        value: 2
+      - name: recid
+        value: |
+          [
+            {"recid": 24119},
+            {"recid": 24120},
+            {"recid": 19980},
+            {"recid": 19983},
+            {"recid": 19985},
+            {"recid": 19949},
+            {"recid": 19999},
+            {"recid": 19397},
+            {"recid": 19407},
+            {"recid": 19419},
+            {"recid": 19412},
+            {"recid": 20548}
+          ]
+      - name: nJobs
+        value: 1
 ```
 
 All of the parameters in arguments can be changed depending on the analysis being done.  
@@ -89,11 +97,5 @@ argo submit -n argo workshop_argo.yaml --watch
 
 You can watch it's progress either on the command line or in the Argo GUI.  When it has finished, you will be able to access the output files by using the commands:
 
-```bash
-kubectl cp pv-pod:/mnt/data /tmp/poddata -n argo
-kubectl cp /tmp/poddata/FILENAME .
-```
-
-Replace FILENAME with any output file you want to access. The output files from this example are histograms.root, . I can't run workflows right now, and I will add in the list of output files when I can.  
 
 There are many different ways to use a workflow, and they can be customized to fit a variety of needs.  Now you are able to edit a yaml file to perform a full analysis flow.
