@@ -45,7 +45,7 @@ The workflow mimicks a full analysis, first processing CMS open data samples wit
 
 Open up the file `argo-poet-ttbar.yaml`, and take a look through its contents. Below is an explanation of the major steps.
 
-`argo-poet-ttbar.yaml` calls and runs multiple different tasks. The file is broken up into different templates.  
+`argo-poet-ttbar.yaml` calls and runs multiple different tasks. The file is broken up into different templates. Note that each task runs in a container, and the workflow is using the same container images that we have been using in the workshop.
 
 1. "argo-poet", the first template, is the entrypoint, and it contains the outline for the rest of the workflow.
 
