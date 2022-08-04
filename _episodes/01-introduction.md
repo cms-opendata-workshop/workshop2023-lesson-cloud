@@ -3,8 +3,8 @@ title: "Introduction"
 teaching: 5
 exercises: 5
 questions:
-- "Why use Google Kubernetes Engine?"
-- "Why use argo workflow?"
+- "How to get to your cluster?"
+- "How to get ready to submit the workflow?"
 objectives:
 - "Get your GCP environment ready to run an argo workflow"
 - "Scale your cluster up to 4 nodes"
