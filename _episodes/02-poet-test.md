@@ -4,7 +4,7 @@ teaching: 20
 exercises: 45
 questions:
 - "How do I run an analysis on multiple datasets?"
-- "How can I change a yaml file to fit different processing needs?"
+- "What are the different steps in the example workflow?"
 objectives:
 - "Mimic a full analysis flow"
 - "Understand structure of a workflow"
