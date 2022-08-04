@@ -38,6 +38,10 @@ For the CMS-Workshop 2022 we have added you to a GCP project where we will provi
 ![](../fig/gke6.png)
 * Click on "RUN IN CLOUD SHELL" to connect to your cluster.
 ![](../fig/gke7.png)
+* In the cloud shell press Enter after the command and authorize cloud shell in the pop-up window that opens
+![](../fig/gke7.png)
+* If requested, submit the command `gcloud auth login` and follow the link the get the authorization code.
+
 
 
 ### Get your services
