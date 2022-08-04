@@ -10,7 +10,7 @@ objectives:
 - "Scale your cluster up to 4 nodes"
 - "Get the tools running to observe the working processes"
 keypoints:
-- "It is important to have accountability of all the resources you are using and delete them all correspondingly, else you might get billed for something you leave open!"
+- "You can submit the workflow from the Google cloud shell connected to your cluster."
 ---
 
 ## Access your GKE Cluster
