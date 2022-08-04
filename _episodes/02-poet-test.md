@@ -47,7 +47,7 @@ The first template must have the same name as the the entrypoint value, which is
 
 The fifth template uses scattering to run the analysis.  It runs the code specified within in mutliple pods at the same time.  The Argo GUI helps us visualize this process.
 
-![](../fig/poet-test12.PNG)
+![](../fig/poet-test3.PNG)
 
 The number of pods increases depending on how many files you are trying to run. Depending on the resources you allocate to you cluster, there is a limit to the number of pods you have running at one time.  If you have more pods than this number, they will wait for eachother to complete.  
 
