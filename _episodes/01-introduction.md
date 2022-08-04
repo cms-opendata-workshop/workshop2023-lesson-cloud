@@ -4,9 +4,10 @@ teaching: 5
 exercises: 5
 questions:
 - "Why use Google Kubernetes Engine?"
-- ""
+- "Why use argo workflow?"
 objectives:
 - "Get your GCP environment ready to run an argo workflow"
+- "Scale your cluster up to 4 nodes"
 - "Get the tools running to observe the working processes"
 keypoints:
 - "It is important to have accountability of all the resources you are using and delete them all correspondingly, else you might get billed for something you leave open!"
