@@ -20,10 +20,25 @@ For the CMS-Workshop 2022 we have added you to a GCP project where we will provi
 * Verify that you are in the [CMS-opendata Project](https://console.cloud.google.com/welcome?project=cms-opendata).
 ![](../fig/gcp2.PNG)
 * Go the Kubernetes engines cluster listing from the Navigation menu top left, scroll down to "Kubernetes engine" and select "Clusters".
-![](../fig/gcp3.PNG)
+![](../fig/gcp3.png)
 * Find the number of your cluster in the email you have received and select your cluster in the list
-* [Resize](https://cloud.google.com/kubernetes-engine/docs/how-to/resizing-a-cluster) your cluster to ```4 nodes```. 
-* Connect to your cluster in cloud shell
+* The cluster has been created with one node only to limit the costs. Now as you start using the cluster, [resize](https://cloud.google.com/kubernetes-engine/docs/how-to/resizing-a-cluster) your cluster to ```4 nodes```:
+  * Click on the three vertical dots after your cluster name and select "Edit".
+![](../fig/gke1.png)
+  * Choose Nodes.
+![](../fig/gke2.png)
+  * Then click on the Node pools name "terraform...".
+![](../fig/gke3.png)
+  * Select "Resize".
+![](../fig/gke4.png)
+  * Set the number of nodes to 4.
+![](../fig/gke5.png)
+
+* Now go back to the cluster listing page, click on the three vertical dots and choose connect.
+![](../fig/gke6.png)
+* Click on "RUN IN CLOUD SHELL" to connect to your cluster.
+![](../fig/gke7.png)
+
 
 ### Get your services
 Your cluster has been built altogether with [Terraform](https://www.terraform.io), including all the configurations seen in the [cloud pre-exercises](https://cms-opendata-workshop.github.io/workshop2022-lesson-introcloud/). 
