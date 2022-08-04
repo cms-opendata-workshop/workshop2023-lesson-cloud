@@ -93,10 +93,10 @@ kubectl get svc -n argo
 ```
 
 ### Argo GUI
-In a new tab open ```https://<EXTERNAL-IP>:2746```, replacing `<EXTERNAL-IP> with corresponding external IP of your `argo-server-N` from the ouput of the command above.
+In a new tab open ```https://<EXTERNAL-IP>:2746```, replacing `<EXTERNAL-IP>` with corresponding external IP of your `argo-server-<NUMBER>` from the ouput of the command above.
 
 ### Http File Server
-In a new tab open ```<EXTERNAL-IP>```, no need to add anything, just paste the external IP of your `http-fileserver-N` from the ouput of the command above.
+In a new tab open ```<EXTERNAL-IP>```, no need to add anything, just paste the external IP of your `http-fileserver-<NUMBER>` from the ouput of the command above.
 
 
 ## Next
