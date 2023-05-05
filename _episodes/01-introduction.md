@@ -52,7 +52,7 @@ The cluster has been created with one node only to limit the costs. Now as you s
 Argo components are already running on the cluster! But to submit the workflow from the cloud shell, you will need the argo command-line interface. You can download the binary and move it to it's respective path with the following commands:
 
 ```bash
-curl -sLO https://github.com/argoproj/argo/releases/download/v2.11.1/argo-linux-amd64.gz
+curl -sLO https://github.com/argoproj/argo-workflows/releases/download/v3.4.7/argo-darwin-amd64.gz
 gunzip argo-linux-amd64.gz
 chmod +x argo-linux-amd64
 sudo mv ./argo-linux-amd64 /usr/local/bin/argo
