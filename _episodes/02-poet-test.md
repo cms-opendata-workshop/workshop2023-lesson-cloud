@@ -51,15 +51,15 @@ kubectl exec pv-pod -n argo -- ls /mnt/data
 
 ## Expanding the Yaml File
 
-In the previous section, you downloaded a workflow definition and submitted it. It should be now running. This workflow corresponds to the analysis example presented in this workshop.
+In the previous section, you downloaded a workflow definition and submitted it. It should now be running. This workflow corresponds to the analysis example presented in this workshop.
 
-The workflow mimicks a full analysis, first processing CMS open data samples with POET and then running analysis script on the ouput files.
+The workflow mimicks a full analysis, first processing CMS open data samples with POET and then running an analysis script on the output files.
 
-Open up the file `argo-poet.yaml`, and take a look through its contents. Below is an explanation of the major steps.
+Open up the file [argo-poet.yaml](https://github.com/cms-opendata-analyses/PhysObjectExtractorTool/blob/odws2023/PhysObjectExtractor/cloud/argo_poet.yaml), and take a look through its contents. Below is an explanation of the major steps.
 
 `argo-poet.yaml` calls and runs multiple different tasks. The file is broken up into different templates. Note that each task runs in a container, and the workflow is using the same container images that we have been using in the workshop. 
 
-1. "cms-od-example", the first template, is the entrypoint, and it contains the outline for the rest of the workflow.
+1. **cms-od-example**, the first template, is the entrypoint, and it contains the outline for the rest of the workflow.
 
 2. "prepare-template" gets the directories ready for other workflow steps.  
 
@@ -73,7 +73,7 @@ Open up the file `argo-poet.yaml`, and take a look through its contents. Below i
 
 7. "analysis-step-template" runs the analysis.
 
-The first template must have the same name as the entrypoint value, which is declared close to the top of the file.  Under the `dag` section of the first template, it calls other templates that are defined below.  It also contains information such as arguments to pass into each of these sections and dependencies that ensure the templates are run in the correct order.
+The first template must have the same name as the entrypoint value, which is declared close to the top of the file.  Under the `dag` section of the first template, it calls other templates defined below.  It also contains information such as arguments to pass into each of these sections and dependencies that ensure the templates are run in the correct order.
 
 The fifth template uses scattering to run the analysis.  It runs multiple pods at the same time.  The Argo GUI helps us visualize this process.
 
@@ -101,19 +101,41 @@ The workflow takes the following parameters:
       value: 4
 ```
 
-They give the input to the workflow steps.  
+They give input to the workflow steps.  
 - `startFile` is the first file in the list to be processed
 - `nFiles` is the number of files in each dataset you want to process in a single job.
 - `nEvents` is the number of events per job and is relevant only for testing (i.e. when not analyzing all events in the file)
 - `recid` is the dataset to be processed.
-- `nJobs` is the number of separate jobs.
+- `nJobs` is the number of separate jobs
 
-### Accessing and using datasets
+This implementation is mainly for small-scale testing. For any larger production, it would make sense to change `nEvents` to the total number of events to be processed (and not per job).
 
-Tho access the dataset file listing you will need its record number or `recid`, which can be found at the end of the dataset description on the CERN Open data portal. For example, in the dataset shown below, the [recid is 24119](https://opendata.cern.ch/record/24119).
+## Getting metadata
 
-![](../fig/RecidURL2.png)
+The metadata are retrieved using the [cernopendata-client](https://cernopendata-client.readthedocs.io/en/latest/) container image. It is available also as a command-line tool. Task `get-metadata` make the following queries:
+
+- listing of all files  in the dataset:`cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd`
+- the type of data (collision/simulated): `cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary`
+- number of files: `cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files`
+ 
+Leaving out the `--output-value` option would give all metadata, which could also be inspected directly from the open data portal records by adding `/export/json` to the [record URL](https://opendata.cern.ch/record/24119/export/json).
 
 
+## Passing information from one task to another
 
-Note that this is just an example workflow for demonstration purposes. The workflows can be customized to fit a variety of needs.  Now you are able to edit a yaml file to perform a full analysis flow.
+The main challenge in any workflow language is the communication between the tasks. This workflow implementation illustrates some of the possibilities when using Argo as a workflow language:
+
+- a mounted volume `/mnt/vol`, available as a `persistent volume` to all tasks - used for files
+- input parameters - used for configurable input parameters
+- output parameters - used to pass the output from one task to another through a defined parameter
+- output to stdout - used to pass the stdout output of one task to another.
+
+There are many other workflow languages available, Argo is only one of them.
+
+## Remarks
+
+This is an example workflow for demonstration purposes. To keep it simple, it does not include any error handling. 
+
+Merging files with `hadd` may fail for a large number of files and better implementation would be needed.
+
+The workflows can be customized to fit a variety of needs. You should now be able to edit an Argo workflow yaml file to adapt it for your own purposes.
