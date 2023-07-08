@@ -61,21 +61,21 @@ Open up the file [argo-poet.yaml](https://github.com/cms-opendata-analyses/PhysO
 
 1. **cms-od-example**, the first template, is the entrypoint, and it contains the outline for the rest of the workflow.
 
-2. "prepare-template" gets the directories ready for other workflow steps.  
+2. **prepare-template** gets the directories ready for other workflow steps.  
 
-3. "get-metadata-template" uses `cernopendata-client` to get all files of the datasets.
+3. **get-metadata-template** uses `cernopendata-client` to get the metadata of the dataset.
 
-4. "joblist-template" prepares the list of jobs that the next step would iterate over
+4. **joblist-template** prepares an array that the next step would iterate over.
 
-5. "runpoet-template" processes the data, and it will take the longest amount of time to complete.  
+5. **runpoet-template** processes the data, and it will take the longest amount of time to complete.  
 
-6. "merge-step-template" combines the inputs from the jobs of the previous steps and combined them in a single root  
+6. **merge-step-template** combines the inputs from the jobs of the previous steps into a single file. 
 
-7. "analysis-step-template" runs the analysis.
+7. **analysis-step-template** creates some histograms to check that the processing went OK.
 
 The first template must have the same name as the entrypoint value, which is declared close to the top of the file.  Under the `dag` section of the first template, it calls other templates defined below.  It also contains information such as arguments to pass into each of these sections and dependencies that ensure the templates are run in the correct order.
 
-The fifth template uses scattering to run the analysis.  It runs multiple pods at the same time.  The Argo GUI helps us visualize this process.
+The fifth template takes the array of the preceding step and iterates over it. It runs multiple jobs at the same time.  The Argo GUI helps us visualize this process.
 
 FIXME
 ![](../fig/poet-test3.PNG)
@@ -91,10 +91,8 @@ The workflow takes the following parameters:
     parameters:
     - name: startFile                                  
       value: 1
-    - name: nFiles                               
-      value: 1
     - name: nEvents                               
-      value: 1000
+      value: 10000
     - name: recid
       value: 24119
     - name: nJobs
@@ -103,12 +101,11 @@ The workflow takes the following parameters:
 
 They give input to the workflow steps.  
 - `startFile` is the first file in the list to be processed
-- `nFiles` is the number of files in each dataset you want to process in a single job.
-- `nEvents` is the number of events per job and is relevant only for testing (i.e. when not analyzing all events in the file)
+- `nEvents` is the number of events to be processed
 - `recid` is the dataset to be processed.
 - `nJobs` is the number of separate jobs
 
-This implementation is mainly for small-scale testing. For any larger production, it would make sense to change `nEvents` to the total number of events to be processed (and not per job).
+This implementation is mainly for small-scale testing but in principle can be run with any number of events and jobs.
 
 ## Getting metadata
 
