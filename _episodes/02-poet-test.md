@@ -77,8 +77,7 @@ The first template must have the same name as the entrypoint value, which is dec
 
 The fifth template takes the array of the preceding step and iterates over it. It runs multiple jobs at the same time.  The Argo GUI helps us visualize this process.
 
-FIXME
-![](../fig/poet-test3.PNG)
+![](../fig/poet-wf-2023.png)
 
 Depending on the resources you allocate to your cluster, there is a limit to the number of pods you have running at one time.  If you have more pods than this number, they will wait for each other to complete.  
 
