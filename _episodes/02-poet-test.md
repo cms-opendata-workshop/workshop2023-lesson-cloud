@@ -49,6 +49,7 @@ kubectl exec pv-pod -n argo -- ls /mnt/data
 ```
 
 
+
 ## Expanding the Yaml File
 
 In the previous section, you downloaded a workflow definition and submitted it. It should now be running. This workflow corresponds to the analysis example presented in this workshop.
@@ -82,7 +83,7 @@ The fifth template takes the array of the preceding step and iterates over it. I
 Depending on the resources you allocate to your cluster, there is a limit to the number of pods you have running at one time.  If you have more pods than this number, they will wait for each other to complete.  
 
 
-## Workflow input parameters
+### Workflow input parameters
 The workflow takes the following parameters:
 
 ```yaml
@@ -106,7 +107,7 @@ They give input to the workflow steps.
 
 This implementation is mainly for small-scale testing but in principle can be run with any number of events and jobs.
 
-## Getting metadata
+### Getting metadata
 
 The metadata are retrieved using the [cernopendata-client](https://cernopendata-client.readthedocs.io/en/latest/) container image. It is available also as a command-line tool. Task `get-metadata` make the following queries:
 
@@ -117,7 +118,7 @@ The metadata are retrieved using the [cernopendata-client](https://cernopendata-
 Leaving out the `--output-value` option would give all metadata, which could also be inspected directly from the open data portal records by adding `/export/json` to the [record URL](https://opendata.cern.ch/record/24119/export/json).
 
 
-## Passing information from one task to another
+### Passing information from one task to another
 
 The main challenge in any workflow language is the communication between the tasks. This workflow implementation illustrates some of the possibilities when using Argo as a workflow language:
 
@@ -126,12 +127,13 @@ The main challenge in any workflow language is the communication between the tas
 - output parameters - used to pass the output from one task to another through a defined parameter
 - output to stdout - used to pass the stdout output of one task to another.
 
-There are many other workflow languages available, Argo is only one of them.
+## Getting the output
+
+When the workflow has finished, you will see the output in the [http file-server](https://cms-opendata-workshop.github.io/workshop2023-lesson-cloud/01-introduction/index.html#http-file-server) browser window. Please note that each download costs money so do not download big files repeatedly for this workshop hands-on exercise.
 
 ## Remarks
 
-This is an example workflow for demonstration purposes. To keep it simple, it does not include any error handling. 
+This is an example workflow for demonstration purposes. To keep it simple, it does not include any error handling or extensive bookkeeping. It is, however, a typical processing task that we envisage CMS open data users to be interested in.
 
-Merging files with `hadd` may fail for a large number of files and better implementation would be needed.
+We have implemented this example in Argo. There are many other workflow languages available, and Argo is only one of them. 
 
-The workflows can be customized to fit a variety of needs. You should now be able to edit an Argo workflow yaml file to adapt it for your own purposes.
