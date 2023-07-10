@@ -60,7 +60,7 @@ Open up the file [argo-poet.yaml](https://github.com/cms-opendata-analyses/PhysO
 
 `argo-poet.yaml` calls and runs multiple different tasks. The file is broken up into different templates. Note that each task runs in a container, and the workflow is using the same container images that we have been using in the workshop. 
 
-1. **cms-od-example**, the first template, is the entrypoint, and it contains the outline for the rest of the workflow.
+1. **cms-od-example**, the first template, is the entrypoint, and it contains the outline for the rest of the workflow. The listing under `dag` defines the inputs and outputs of each step and their dependencies.
 
 2. **prepare-template** gets the directories ready for other workflow steps.  
 
@@ -74,9 +74,7 @@ Open up the file [argo-poet.yaml](https://github.com/cms-opendata-analyses/PhysO
 
 7. **analysis-step-template** creates some histograms to check that the processing went OK.
 
-The first template must have the same name as the entrypoint value, which is declared close to the top of the file.  Under the `dag` section of the first template, it calls other templates defined below.  It also contains information such as arguments to pass into each of these sections and dependencies that ensure the templates are run in the correct order.
-
-The fifth template takes the array of the preceding step and iterates over it. It runs multiple jobs at the same time.  The Argo GUI helps us visualize this process.
+The `runpoet" step takes the array of the preceding step as input and iterates over it. It runs multiple jobs at the same time.  The Argo GUI helps us visualize this process.
 
 ![](../fig/poet-wf-2023.png)
 
@@ -111,9 +109,9 @@ This implementation is mainly for small-scale testing but in principle can be ru
 
 The metadata are retrieved using the [cernopendata-client](https://cernopendata-client.readthedocs.io/en/latest/) container image. It is available also as a command-line tool. Task `get-metadata` make the following queries:
 
-- listing of all files  in the dataset:`cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd`
-- the type of data (collision/simulated): `cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary`
-- number of files: `cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files`
+- `cernopendata-client get-file-locations --recid "{{inputs.parameters.recid}}" --protocol xrootd` for a listing of all files in a dataset
+- `cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value type.secondary` the type of data (Collision/Simulated)
+- `cernopendata-client get-metadata --recid "{{inputs.parameters.recid}}"  --output-value distribution.number_files` for number of files in the dataset.
  
 Leaving out the `--output-value` option would give all metadata, which could also be inspected directly from the open data portal records by adding `/export/json` to the [record URL](https://opendata.cern.ch/record/24119/export/json).
 
@@ -123,6 +121,14 @@ Leaving out the `--output-value` option would give all metadata, which could als
 The main challenge in any workflow language is the communication between the tasks. This workflow implementation illustrates some of the possibilities when using Argo as a workflow language:
 
 - a mounted volume `/mnt/vol`, available as a `persistent volume` to all tasks - used for files
+  - the persistent volume claim is defined in the beginning with
+    ```yaml
+    volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: nfs-<NUMBER>
+    ```
+  - it can then be used in those step that need access to it
 - input parameters - used for configurable input parameters
 - output parameters - used to pass the output from one task to another through a defined parameter
 - output to stdout - used to pass the stdout output of one task to another.
