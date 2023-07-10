@@ -11,13 +11,14 @@ keypoints:
 - "There are several factors to take into consideration when running workflows on public cloud resources."
 ---
 
+We have run through an example of CMS open data processing on public cloud resources. Now it is time for some preliminary considerations on costs. 
 
 ## Cost and time
-The charges in cloud computing come from the cluster, disk space, and networking. An example of billing details for some days of testing:
+The charges in cloud computing come from the cluster, disk space, and networking. They are based on the time that resources are available and/or on their size. An example of billing details for some days of testing:
 
 <img src="../fig/billing.png" alt="Billing details" width="550" />
 
-For this workshop, we are using a scalable max 4-node cluster that can efficiently run at least two parallel jobs (pods) on each node. The pricing depends on the zone, and whether we've chosen to allow nodes on "[Spot-VMs](https://cloud.google.com/kubernetes-engine/docs/concepts/spot-vms)", i.e. VMs that may get deleted on short notice. For our chosen solution, the price is approximately 0.2-0.3 USD/hour and it shows under "Kubernetes Engines". Note that the "autopilot" clusters were not a choice because their settings do not allow using the nfs disk as we do it. The estimated cost is visible during the cluster creation on the GKE web interface.
+For this workshop, we are using a scalable max 4-node cluster that can efficiently run at least two parallel jobs (pods) on each node. The pricing depends on the zone, and whether we've chosen to allow nodes on "[Spot-VMs](https://cloud.google.com/kubernetes-engine/docs/concepts/spot-vms)", i.e. VMs that may get deleted on short notice. For our chosen solution, the price is approximately 0.2-0.3 USD/hour and it shows under "Kubernetes Engines". The estimated cost is visible during the cluster creation on the GKE web interface. Note that the "autopilot" clusters are not a choice because their settings do not allow using the nfs disk as we do it.
 
 For the persistent disk, we've selected a standard 100 GB disk that costs approximately 0.04 USD/GB/month depending on the zone. In addition, each cluster node creates a 100 GB disk that gets deleted when the node is deleted. Some care is to be taken when setting things up as a more expensive "balanced" disk appears as default. The costs related to disks appear under "Compute Engine". The GCP documentation provides an [overview of disk costs](https://cloud.google.com/compute/disks-image-pricing#disk).
 
@@ -38,5 +39,12 @@ We have not estimated whether it would be convenient to upload the data to the c
 
 ### Data download 
 Downloading data from cloud resources ("egress") is not free. For quick checks of the workflow, you would rather have a lightweight output, i.e. a plot instead of a full histogram file. The final cost estimate needs to include the costs to download the full output data.
+
+## Free resources
+Most cloud providers offer some initial free resources that can be used for a limited time. Some of them remain free even after the initial trial period, but have a limit of free use in a given time. This is the case for the cloud shell which we used to access the cluster, its free use is limited to 50 hours per week. Note that you can also access [GKE clusters using the gcloud CLI](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl) from your own computer.
+
+## Next steps
+For the hands-on session, we provided clusters that already had part of the machinery installed. For a walk-through of the environment setup from scratch, read through the [Cloud post-exercise](https://cms-opendata-workshop.github.io/workshop2023-post-lesson-cloud/).
+
 
 
