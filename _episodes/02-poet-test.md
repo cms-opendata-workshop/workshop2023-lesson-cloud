@@ -58,7 +58,7 @@ The workflow mimicks a full analysis, first processing CMS open data samples wit
 
 Open up the file [argo-poet.yaml](https://github.com/cms-opendata-analyses/PhysObjectExtractorTool/blob/odws2023/PhysObjectExtractor/cloud/argo_poet.yaml), and take a look through its contents. Below is an explanation of the major steps.
 
-`argo-poet.yaml` calls and runs multiple different tasks. The file is broken up into different templates. Note that each task runs in a container, and the workflow is using the same container images that we have been using in the workshop. 
+The workflow calls and runs multiple different tasks. The file is broken up into different templates. Note that each task runs in a container, and the workflow is using the same container images that we have been using in the workshop. 
 
 1. **cms-od-example**, the first template, is the entrypoint, and it contains the outline for the rest of the workflow. The listing under `dag` defines the inputs and outputs of each step and their dependencies.
 
@@ -74,7 +74,7 @@ Open up the file [argo-poet.yaml](https://github.com/cms-opendata-analyses/PhysO
 
 7. **analysis-step-template** creates some histograms to check that the processing went OK.
 
-The `runpoet" step takes the array of the preceding step as input and iterates over it. It runs multiple jobs at the same time.  The Argo GUI helps us visualize this process.
+The "runpoet" step takes the array of the preceding step as input and iterates over it. It runs multiple jobs at the same time.  The Argo GUI helps us visualize this process.
 
 ![](../fig/poet-wf-2023.png)
 
@@ -122,13 +122,15 @@ The main challenge in any workflow language is the communication between the tas
 
 - a mounted volume `/mnt/vol`, available as a `persistent volume` to all tasks - used for files
   - the persistent volume claim is defined in the beginning with
+  
     ```yaml
     volumes:
     - name: task-pv-storage
       persistentVolumeClaim:
         claimName: nfs-<NUMBER>
     ```
-  - it can then be used in those step that need access to it
+    
+  - it can then be used in those steps that need access to it
 - input parameters - used for configurable input parameters
 - output parameters - used to pass the output from one task to another through a defined parameter
 - output to stdout - used to pass the stdout output of one task to another.
