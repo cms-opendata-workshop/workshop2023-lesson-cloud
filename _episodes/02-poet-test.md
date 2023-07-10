@@ -178,7 +178,7 @@ The main challenge in any workflow language is the communication between the tas
 
     ```yaml 
           - name: dataType
-            value: `"{{outputs.parameters.dataType}}"`
+            value: "\{\{outputs.parameters.dataType\}\}"
     ```
 
   - and in the step implementation in which they must have a default value:
