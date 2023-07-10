@@ -176,10 +176,12 @@ The main challenge in any workflow language is the communication between the tas
 - output parameters - used to pass the output from one task to another through a defined parameter
   - they are defined in the `dag` section, e.g.
 
+{% raw %}
     ```yaml 
           - name: dataType
-            value: "{\{outputs.parameters.dataType}\}"
+            value: "{{outputs.parameters.dataType}}"
     ```
+{% endraw %}    
 
   - and in the step implementation in which they must have a default value:
  
