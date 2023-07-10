@@ -97,6 +97,19 @@ The workflow takes the following parameters:
       value: 4
 ```
 
+and they need to be defined as part of the first template:
+
+```yaml
+  templates:
+  - name: cms-od-example
+    inputs:
+      parameters:
+      - name: startFile
+      - name: nEvents
+      - name: recid
+      - name: nJobs
+```
+
 They give input to the workflow steps.  
 - `startFile` is the first file in the list to be processed
 - `nEvents` is the number of events to be processed
@@ -130,9 +143,56 @@ The main challenge in any workflow language is the communication between the tas
         claimName: nfs-<NUMBER>
     ```
     
-  - it can then be used in those steps that need access to it
-- input parameters - used for configurable input parameters
+  - it can then be used in those steps that need access to it with
+
+    ```yaml
+      volumeMounts:
+      - name: task-pv-storage
+        mountPath: /mnt/vol
+    ```
+    
+- input parameters - used for configurable input parameters 
+  - they are defined for each step in the `dag` section, e.g.
+
+    ```yaml
+      - name: get-metadata
+        dependencies: [prepare]
+        template: get-metadata-template
+        arguments:
+         parameters:
+          - name: recid
+            value: "{{inputs.parameters.recid}}"
+    ```
+ 
+  - and later in the workflow in the step implementation
+
+    ```yaml
+     - name: get-metadata-template
+       inputs:
+         parameters:
+         - name: recid
+    ```
+    
 - output parameters - used to pass the output from one task to another through a defined parameter
+  - they are defined in the `dag` section, e.g.
+
+    ```yaml 
+          - name: dataType
+            value: "{{outputs.parameters.dataType}}"
+    ```
+
+  - and in the step implementation in which they must have a default value:
+ 
+    ```yaml
+      outputs:
+        parameters:
+        - name: dataType
+          valueFrom:
+            default: "default"
+            path: /tmp/type.txt
+
+    ```     
+    
 - output to stdout - used to pass the stdout output of one task to another.
 
 ## Getting the output
