@@ -154,6 +154,7 @@ The main challenge in any workflow language is the communication between the tas
 - input parameters - used for configurable input parameters 
   - they are defined for each step in the `dag` section, e.g.
 
+{% raw %}
     ```yaml
       - name: get-metadata
         dependencies: [prepare]
@@ -163,6 +164,7 @@ The main challenge in any workflow language is the communication between the tas
           - name: recid
             value: "{{inputs.parameters.recid}}"
     ```
+{% endraw %}
  
   - and later in the workflow in the step implementation
 
