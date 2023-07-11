@@ -31,10 +31,26 @@ For the CMS Open data Workshop 2023, we have added you to a GCP project where we
 * If requested, submit the command `gcloud auth login` and follow the link the get the authorization code.
 
 A persistent disk has already been created for you, as well as persistent volumes and persistent volume claims. 
-Some other resources are already available, and you check them with
+Some other resources are already available, and you will see them with
 
 ```bash
-kubectl get all -n argo
+$ kubectl get all -n argo
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/http-fileserver-1-5b85db44df-84ppt   1/1     Running   0          30m
+pod/nfs-server-1-69db86f88-kvbkb         1/1     Running   0          32m
+pod/pv-pod                               1/1     Running   0          30m
+
+NAME                        TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
+service/http-fileserver-1   LoadBalancer   10.127.203.234   35.195.41.247   80:32703/TCP                 32m
+service/nfs-server-1        ClusterIP      10.127.194.124   <none>          2049/TCP,20048/TCP,111/TCP   32m
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/http-fileserver-1   1/1     1            1           30m
+deployment.apps/nfs-server-1        1/1     1            1           32m
+
+NAME                                           DESIRED   CURRENT   READY   AGE
+replicaset.apps/http-fileserver-1-5b85db44df   1         1         1       30m
+replicaset.apps/nfs-server-1-69db86f88         1         1         1       32m
 ```
 
 
@@ -46,6 +62,8 @@ Deploy the argo resources needed to run the example workflow with
 ```bash
 kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/quick-start-postgres.yaml
 ```
+
+If Ctrl-v does not work for pasting the command, try Shift-Ctr-v.
 
 ### Argo command-line interface
 To submit the workflow from the cloud shell, you will need the argo command-line interface. You can download the binary and move it to its respective path with the following commands:
