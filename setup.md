@@ -1,7 +1,7 @@
 ---
-title: Setup
+title: Prerequisites
 ---
-Set up your Google Cloud Platform [environment](https://cloud.google.com/run/docs/setup). Please change your project to the [CMS-opendata project](https://console.cloud.google.com/welcome?project=cms-opendata) at the top of the website.
+You should have gone through the [cloud pre-exercise](https://cms-opendata-workshop.github.io/workshop2023-lesson-introcloud/) before this hands-on lesson.
 
 
 {% include links.md %}
