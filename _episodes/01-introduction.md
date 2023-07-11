@@ -117,7 +117,6 @@ argo get @latest -n argo
 
 
 ## Get your services
-Your cluster has been built altogether with [Terraform](https://www.terraform.io), including all the configurations seen in the [cloud pre-exercises](https://cms-opendata-workshop.github.io/workshop2022-lesson-introcloud/). 
 
 To get the external IP of both the `Argo GUI` (with which you can follow the workflow) and the `http server` (through which you can download the outputs), run the following command:
 
