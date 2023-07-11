@@ -105,7 +105,7 @@ sed -i 's/<NUMBER>/YOUR_CLUSTER_NUMBER/' argo_poet.yaml
 Then submit the workflow with
 
 ```bash
-argo submit argo-poet.yaml -n argo
+argo submit argo_poet.yaml -n argo
 ```
 
 Check that it got running with
