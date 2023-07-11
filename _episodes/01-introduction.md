@@ -75,13 +75,13 @@ Now fast forward: to make sure that the workflow makes it in time to finish duri
 Get the workflow file with
 
 ```bash
-https://github.com/cms-opendata-analyses/PhysObjectExtractorTool/blob/odws2023/PhysObjectExtractor/cloud/argo_poet.yaml
+curl -LO https://raw.githubusercontent.com/cms-opendata-analyses/PhysObjectExtractorTool/odws2023/PhysObjectExtractor/cloud/argo_poet.yaml
 ```
 
-The workflow defines the persistent volume in which the output is stored. Edit the workflow to replace `<NUMBER>` to correspond to your cluster number. You can use an editor available in cloud shell for editing, or use command line editors such as `vim` or `nano` if you are familiar with them.
+The workflow defines the persistent volume in which the output is stored. Edit the workflow to replace `<NUMBER>` to correspond to your cluster number. You can use an editor available in cloud shell for editing, or use command line editors such as `vim` or `nano` if you are familiar with them. Or if you like, use the following command to replace the string, but replace YOUR_CLUSTER_NUMBER in it with the number of your cluster
 
 ```bash
-nano argo-poet.yaml
+sed -i 's/<NUMBER>/YOUR_CLUSTER_NUMBER/' argo_poet.yaml
 ```
 
 Then submit the workflow with
