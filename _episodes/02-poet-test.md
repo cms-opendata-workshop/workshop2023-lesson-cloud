@@ -133,7 +133,7 @@ Leaving out the `--output-value` option would give all metadata, which could als
 
 The main challenge in any workflow language is the communication between the tasks. This workflow implementation illustrates some of the possibilities when using Argo as a workflow language:
 
-- a mounted volume `/mnt/vol`, available as a `persistent volume` to all tasks - used for files
+- **a mounted volume** `/mnt/vol`, available as a `persistent volume` to all tasks - used for files
   - the persistent volume claim is defined in the beginning with
   
     ```yaml
@@ -151,7 +151,7 @@ The main challenge in any workflow language is the communication between the tas
         mountPath: /mnt/vol
     ```
     
-- input parameters - used for configurable input parameters 
+- **input parameters** - used for configurable input parameters 
   - they are defined for each step in the `dag` section, e.g.
 
 {% raw %}
@@ -175,7 +175,7 @@ The main challenge in any workflow language is the communication between the tas
          - name: recid
     ```
     
-- output parameters - used to pass the output from one task to another through a defined parameter
+- **output parameters** - used to pass the output from one task to another through a defined parameter
   - they are defined in the `dag` section, e.g.
 
 {% raw %}
@@ -197,11 +197,11 @@ The main challenge in any workflow language is the communication between the tas
 
     ```     
     
-- output to stdout - used to pass the stdout output of one task to another.
+- **output to stdout** - used to pass the stdout output of one task to another.
 
 ## Getting the output
 
-When the workflow has finished, you will see the output in the [http file-server](https://cms-opendata-workshop.github.io/workshop2023-lesson-cloud/01-introduction/index.html#http-file-server) browser window. Please note that each download costs money so do not download big files repeatedly for this workshop hands-on exercise.
+Now back to the workflow that you submitted earlier. When it has completed, you will see the output in the [http file-server](https://cms-opendata-workshop.github.io/workshop2023-lesson-cloud/01-introduction/index.html#http-file-server) browser window. Please note that each download costs money so do not download big files repeatedly for this workshop hands-on exercise.
 
 ## Remarks
 
