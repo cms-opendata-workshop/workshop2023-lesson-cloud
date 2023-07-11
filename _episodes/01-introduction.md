@@ -14,31 +14,15 @@ keypoints:
 ---
 
 ## Access your GKE Cluster
-For the CMS-Workshop 2022 we have added you to a GCP project where we will provide temporary resources to run an Argo Workflow. Before we get into details please follow the following steps to get things started!
+For the CMS Open data Workshop 2023, we have added you to a GCP project where we will provide temporary resources to run an Argo Workflow. Before we get into details please follow the following steps to get things started!
 
 ### Find your cluster
-* Go to the [Google Cloud Console](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiT1aCX6av5AhWKtYQIHYGlASQQjBB6BAgEEAE&url=https%3A%2F%2Fconsole.cloud.google.com%2F%3Fhl%3Des&usg=AOvVaw32wCy6el4RVbIZO1m5wyNI) and login with your google account.
-* Verify that you are in the [CMS-opendata Project](https://console.cloud.google.com/welcome?project=cms-opendata).
-![](../fig/gcp2.PNG)
-* Go the Kubernetes engines cluster listing from the Navigation menu top left, scroll down to "Kubernetes engine" and select "Clusters".
-![](../fig/gcp3.png)
+* Go to the [Google Kubernetes Engine page](https://console.cloud.google.com/kubernetes/list/overview?project=crucial-baton-391716)
+* You should see a listing of clusters.
 * Find the number of your cluster in the email you have received and select your cluster in the list.
 
-### Resize your cluster
-The cluster has been created with one node only to limit the costs. Now as you start using the cluster, [resize](https://cloud.google.com/kubernetes-engine/docs/how-to/resizing-a-cluster) your cluster to ```4 nodes```:
-* Click on the three vertical dots after your cluster name and select "Edit".
-![](../fig/gke1.png)
-* Choose Nodes.
-![](../fig/gke2.png)
-* Then click on the Node pools name "terraform...".
-![](../fig/gke3.png)
-* Select "Resize".
-![](../fig/gke4.png)
-* Set the number of nodes to 4.
-![](../fig/gke5.png)
-
 ### Connect to the cluster
-* Now go back to the cluster listing page, click on the three vertical dots and choose connect.
+* Now go back to the cluster listing page, click on the three vertical dots, and choose "connect".
 ![](../fig/gke6.png)
 * Click on "RUN IN CLOUD SHELL" to connect to your cluster.
 ![](../fig/gke7.png)
@@ -46,10 +30,25 @@ The cluster has been created with one node only to limit the costs. Now as you s
 ![](../fig/gke8.png)
 * If requested, submit the command `gcloud auth login` and follow the link the get the authorization code.
 
+A persistent disk has already been created for you, as well as persistent volumes and persistent volume claims. 
+Some other resources are already available, and you check them with
+
+```bash
+kubectl get all -n argo
+```
+
+
 ## Argo
 
+### Argo resources
+Deploy the argo resources needed to run the example workflow with
+
+```bash
+kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/quick-start-postgres.yaml
+```
+
 ### Argo command-line interface
-Argo components are already running on the cluster! But to submit the workflow from the cloud shell, you will need the argo command-line interface. You can download the binary and move it to it's respective path with the following commands:
+To submit the workflow from the cloud shell, you will need the argo command-line interface. You can download the binary and move it to its respective path with the following commands:
 
 ```bash
 # Download the binary
@@ -62,11 +61,13 @@ gunzip argo-linux-amd64.gz
 chmod +x argo-linux-amd64
 
 # Move binary to path
-sudo mv ./argo-linux-amd64 /usr/local/bin/argo
+sudo cp ./argo-linux-amd64 /usr/local/bin/argo
 
 # Test installation
 argo version
 ```
+
+If your cloud shell gets disconnected and argo is not available in the new cloud shell, you can repeat the `sudo cp ...` command to have it in place again.
 
 ### Submit the workflow
 Now fast forward: to make sure that the workflow makes it in time to finish during the hands-on session, submit it right now. We will explain the details while the workflow is running.
@@ -74,19 +75,19 @@ Now fast forward: to make sure that the workflow makes it in time to finish duri
 Get the workflow file with
 
 ```bash
-wget https://raw.githubusercontent.com/cms-opendata-analyses/PhysObjectExtractorTool/odws2022-ttbaljets-prod/PhysObjectExtractor/cloud/argo-poet-ttbar.yaml
+https://github.com/cms-opendata-analyses/PhysObjectExtractorTool/blob/odws2023/PhysObjectExtractor/cloud/argo_poet.yaml
 ```
 
-The workflow defines the persistent volume in which the output is stored. Edit the workflow to replace `<NUMBER>` to correspond to your cluster number. 
+The workflow defines the persistent volume in which the output is stored. Edit the workflow to replace `<NUMBER>` to correspond to your cluster number. You can use an editor available in cloud shell for editing, or use command line editors such as `vim` or `nano` if you are familiar with them.
 
 ```bash
-nano argo-poet-ttbar.yaml
+nano argo-poet.yaml
 ```
 
 Then submit the workflow with
 
 ```bash
-argo submit argo-poet-ttbar.yaml -n argo
+argo submit argo-poet.yaml -n argo
 ```
 
 Check that it got running with
@@ -100,17 +101,17 @@ argo get @latest -n argo
 ## Get your services
 Your cluster has been built altogether with [Terraform](https://www.terraform.io), including all the configurations seen in the [cloud pre-exercises](https://cms-opendata-workshop.github.io/workshop2022-lesson-introcloud/). 
 
-To get the external IP of both the `Argo GUI` (with which you can follow the workflow) and the `http server` (through which you can download the ouputs), run the following command:
+To get the external IP of both the `Argo GUI` (with which you can follow the workflow) and the `http server` (through which you can download the outputs), run the following command:
 
 ```bash
 kubectl get svc -n argo
 ```
 
 ### Http File Server
-In a new tab open ```<EXTERNAL-IP>```, no need to add anything, just paste the external IP of your `http-fileserver-<NUMBER>` from the ouput of the command above.
+In a new tab open ```<EXTERNAL-IP>```, no need to add anything, just paste the external IP of your `http-fileserver-<NUMBER>` from the output of the command above.
 
 ### Argo GUI
-In a new tab open ```https://<EXTERNAL-IP>:2746```, replacing `<EXTERNAL-IP>` with corresponding external IP of your `argo-server-<NUMBER>` from the ouput of the command above.
+In a new tab open ```https://<EXTERNAL-IP>:2746```, replacing `<EXTERNAL-IP>` with the corresponding external IP of your `argo-server-<NUMBER>` from the output of the command above.
 
 
 ## Next
