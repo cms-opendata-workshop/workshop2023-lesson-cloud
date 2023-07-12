@@ -1,0 +1,76 @@
+---
+title: "Cloud challenges"
+teaching: 10
+exercises: 60
+questions:
+- "How to adapt the workflow to me needs?"
+- "How to get my own code in the processing step?"
+- "How to change the resource requests for a workflow step?"
+objectives:
+- Rehearse getting back to the cluster
+- Exercise adapting the example workflow
+keypoints:
+- "Workflows can be written in a way to allow changes through input parameters"
+- "The processing and analysis steps can clone your code from git repositories"
+---
+
+## Getting back to your cluster
+
+Get to your cluster through the [Google Kubernetes Engine page](https://console.cloud.google.com/kubernetes/list/overview?project=crucial-baton-391716) page.
+
+Select the your cluster and connect.
+
+![](../fig/gke6.png)
+
+Open the cloud shell. The files that you had in the cloud shell are still available, but you will need to copy the argo executable to the path:
+
+´´´bash
+# Move binary to path
+sudo cp ./argo-linux-amd64 /usr/local/bin/argo
+
+# Test installation
+argo version
+```
+
+## Challenges
+
+Choose one or more of the following challenges:
+
+> ## Challenge 1
+> Change the workflow to run over `/SingleElectron/Run2015D-08Jun2016-v1/MINIAOD`
+> 
+> > ## Solution
+> >  Find the dataset and recid
+> {: .solution}
+{: .challenge}
+
+> ## Challenge 2
+> Change the resource request to better match our cluster configuration
+> 
+> > ## Solution
+> >  
+> {: .solution}
+{: .challenge}
+
+> ## Challenge 3
+> Change the processing step to use your own selection
+> 
+> > ## Solution
+> >  Make a fork of the POET repository and modify the configuration file `python/poet_cfg_cloud.py` for your needs.
+> >  Change the runpoet step in the workflow file to clone from your repository.
+> {: .solution}
+{: .challenge}
+
+> ## Challenge 4
+> Change the analysis step to plot different values
+> 
+> > ## Solution
+> >  Make a fork of the POET repository and modify the configuration file `cloud/analysis.C` for your needs.
+> >  Change the analysis step to your code.
+> >  If you do not intend to change the actual processing, it would be enough to have that file alone in a repository (or any other location) from which you can get it with `wget`.
+> >  Change the runpoet step in the workflow file to clone from your repository.
+> {: .solution}
+{: .challenge}
+
+
+## Challenges
