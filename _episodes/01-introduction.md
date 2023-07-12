@@ -127,7 +127,7 @@ kubectl get svc -n argo
 ### Http File Server
 In a new tab open ```<EXTERNAL-IP>```, no need to add anything, just paste the external IP of your `http-fileserver-<NUMBER>` from the output of the command above.
 
-You can also use the following command to print out the exact URL (replace <NUMBER> with the number of your cluster)
+You can also use the following command to print out the exact URL (replace `<NUMBER>` with the number of your cluster)
 ```bash
 echo "http://$(kubectl get services -n argo http-fileserver-<NUMBER> -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
 ```
