@@ -140,13 +140,13 @@ To get the Argo GUI running, run the following command:
 kubectl -n argo port-forward deployment/argo-server 2746:2746
 ```
 
-Once it has started forwarding the port we will have to manually enable the port, to do this open a new cloud shell tab and run the following command:
+Once it has started forwarding the port, we will have to manually enable the port. **Open a new cloud shell tab** and run the following command:
 
 ```bash
-lynx https://localhost:2746
+lynx --accept_all_cookies --source https://localhost:2746 >/dev/null 2>&1
 ```
 
-Access it and then quit. Return to the previous tab and you will see that the port is being accessed and handled, you can exit with ^C and finally patch the service with:
+Finally, patch the service with:
 
 ```bash
 kubectl patch svc argo-server -n argo -p '{"spec": {"type": "LoadBalancer"}}'
@@ -157,13 +157,12 @@ Since it is creating an external ip, wait a couple minutes. You can check if it 
 kubectl get svc -n argo
 ```
 
-In a new tab open ```https://<EXTERNAL-IP>:2746```, replacing `<EXTERNAL-IP>` with the corresponding external IP of your `argo-server-<NUMBER>` from the output of the command above.
+To access the Argo GUI, open a new browser tab with the following IP address: ```https://<EXTERNAL-IP>:2746```, replacing `<EXTERNAL-IP>` with the corresponding external IP of your `argo-server-<NUMBER>` from the output of the command above.
 
 You can also use the following command to print out the exact URL
 ```bash
 echo "https://$(kubectl get services -n argo argo-server -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):2746"
 ```
-
 
 You should now be able to see your workflow in the Argo GUI.
 
