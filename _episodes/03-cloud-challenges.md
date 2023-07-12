@@ -74,9 +74,10 @@ Choose one or more of the following challenges:
 > Change the analysis step to plot different values
 > 
 > > ## Solution
-> >  - Make a fork of the POET repository and modify the configuration file `PhysObjectExtractor/cloud/analysis.C` for your needs.
+> >  - Make a fork of the POET repository and move to `odws2023` branch.
+> >  - Modify the analysis script `PhysObjectExtractor/cloud/analysis.C` for your needs.
 > >  - Change the analysis step to your code.
-> >    - If you do not intend to change the actual processing, it would be enough to have that file alone in a repository (or any other location) from which you can get it with `wget`, it does not need to be a fork from the POET repository.
+> >    - If you do not intend to change the actual processing, it is enough to have that file alone in a repository (or any other location from which you can get it with `wget` or `curl -LO`, it does not need to be a fork from the POET repository.
 > >  - Change the analysis step in the workflow file to clone from your repository.
 > {: .solution}
 {: .challenge}
