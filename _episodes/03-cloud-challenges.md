@@ -45,10 +45,17 @@ Choose one or more of the following challenges:
 {: .challenge}
 
 > ## Challenge 2
-> Change the resource request to better match our cluster configuration
+> Change the resource request to better match our cluster configuration.
+>
+> If we look at the cost optimization of the cluster, we see that the choice of `750m` for the CPU request was not optimal:
+>
+> ![](../fig/gke9.png){:width="70%"}
 > 
 > > ## Solution
-> >  
+> > - Read the documentation about [kubernetes resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
+> > - Choose a different value for the resource request `cpu: 750m` and see how it changes the scheduling and resource usage.
+> > - You can see the nodes on which the pods run with `kubectl get pods -n argo -o wide`
+> > - You can see the resource usage of the nodes with `kubectl top nodes` and that of pods with `kubectl top pods -n argo`  
 > {: .solution}
 {: .challenge}
 
@@ -72,5 +79,3 @@ Choose one or more of the following challenges:
 > {: .solution}
 {: .challenge}
 
-
-## Challenges
