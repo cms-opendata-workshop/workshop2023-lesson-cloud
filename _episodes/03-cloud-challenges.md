@@ -71,14 +71,17 @@ Choose one or more of the following challenges:
 {: .challenge}
 
 > ## Challenge 4
-> Change the analysis step to plot different values
+> Change the analysis step to plot different values. For example, you may want to plot some values from the PF candidate collection, such as their number and the pdg id's.
 > 
 > > ## Solution
 > >  - Make a fork of the POET repository and move to `odws2023` branch.
 > >  - Modify the analysis script `PhysObjectExtractor/cloud/analysis.C` for your needs.
 > >  - Change the analysis step to your code.
-> >    - If you do not intend to change the actual processing, it is enough to have that file alone in a repository (or any other location from which you can get it with `wget` or `curl -LO`, it does not need to be a fork from the POET repository.
-> >  - Change the analysis step in the workflow file to clone from your repository.
+> >    - You can use this [simple plotter](https://github.com/cms-opendata-workshop/workshop2023-lesson-cloud/blob/gh-pages/files/analysis_challenge.C) as an example.
+> >    - If you do not intend to change the actual processing, it is enough to have that file alone in a repository (or any other location from which you can get it with `wget` or `curl -LO`), it does not need to be a fork from the POET repository.
+> >    - Remember that you need to use the GitHub `raw` view to get the file if you are not cloning the repository.
+> >  - Change the analysis step in the workflow file to get the file from your repository.
+> > 
 > {: .solution}
 {: .challenge}
 
