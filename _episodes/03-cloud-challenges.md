@@ -40,7 +40,8 @@ Choose one or more of the following challenges:
 > Change the workflow to run over `/SingleElectron/Run2015D-08Jun2016-v1/MINIAOD`
 > 
 > > ## Solution
-> >  Find the dataset and identify its `recid`. Use the [search facets](http://opendata.cern.ch/search?page=1&size=20&type=Dataset&subtype=Collision&year=2015&experiment=CMS) to find all MINIAOD collision datasets from 2015.
+> >  - Find the dataset and identify its `recid`. Use the [search facets](http://opendata.cern.ch/search?page=1&size=20&type=Dataset&subtype=Collision&year=2015&experiment=CMS) to find all MINIAOD collision datasets from 2015.
+> >  - Change the input recid value in `argo_poet.yaml`.
 > {: .solution}
 {: .challenge}
 
@@ -53,7 +54,7 @@ Choose one or more of the following challenges:
 > 
 > > ## Solution
 > > - Read the documentation about [kubernetes resource requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
-> > - Choose a different value for the resource request `cpu: 750m` and see how it changes the scheduling and resource usage.
+> > - Choose a different value for the resource request `cpu: 750m` in `argo_poet.yaml` and see how it changes the scheduling and resource usage.
 > > - You can see the nodes on which the pods run with `kubectl get pods -n argo -o wide`
 > > - You can see the resource usage of the nodes with `kubectl top nodes` and that of pods with `kubectl top pods -n argo`  
 > {: .solution}
@@ -63,7 +64,7 @@ Choose one or more of the following challenges:
 > Change the processing step to use your own selection
 > 
 > > ## Solution
-> >  - Make a fork of the POET repository and modify the configuration file `python/poet_cfg_cloud.py` for your needs.
+> >  - Make a fork of the POET repository and modify the configuration file `PhysObjectExtractor/python/poet_cfg_cloud.py` for your needs.
 > >  - Change the runpoet step in the workflow file to clone from your repository.
 > {: .solution}
 {: .challenge}
@@ -72,10 +73,10 @@ Choose one or more of the following challenges:
 > Change the analysis step to plot different values
 > 
 > > ## Solution
-> >  - Make a fork of the POET repository and modify the configuration file `cloud/analysis.C` for your needs.
+> >  - Make a fork of the POET repository and modify the configuration file `PhysObjectExtractor/cloud/analysis.C` for your needs.
 > >  - Change the analysis step to your code.
 > >    - If you do not intend to change the actual processing, it would be enough to have that file alone in a repository (or any other location) from which you can get it with `wget`, it does not need to be a fork from the POET repository.
-> >  Change the analysis step in the workflow file to clone from your repository.
+> >  - Change the analysis step in the workflow file to clone from your repository.
 > {: .solution}
 {: .challenge}
 
