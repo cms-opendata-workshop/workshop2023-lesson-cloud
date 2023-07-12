@@ -61,10 +61,11 @@ Choose one or more of the following challenges:
 {: .challenge}
 
 > ## Challenge 3
-> Change the processing step to use your own selection
+> Change the processing step to use your own selection. For example, you may not want to have the PF candidate collection (`packedPFCandidates`) included because it makes the output file very large.
 > 
 > > ## Solution
-> >  - Make a fork of the POET repository and modify the configuration file `PhysObjectExtractor/python/poet_cfg_cloud.py` for your needs.
+> >  - Make your own fork of the POET repository and move to `odws2023` branch.
+> >  - Modify the configuration file `PhysObjectExtractor/python/poet_cfg_cloud.py`: remove `process.mypackedcandidate` from the two `cms.Path` at the end of the file.
 > >  - Change the runpoet step in the workflow file to clone from your repository.
 > {: .solution}
 {: .challenge}
