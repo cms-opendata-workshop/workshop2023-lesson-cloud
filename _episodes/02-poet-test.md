@@ -203,6 +203,15 @@ The main challenge in any workflow language is the communication between the tas
 
 Now back to the workflow that you submitted earlier. When it has completed, you will see the output in the [http file-server](https://cms-opendata-workshop.github.io/workshop2023-lesson-cloud/01-introduction/index.html#http-file-server) browser window. Please note that each download costs money so do not download big files repeatedly for this workshop hands-on exercise.
 
+Once the workflow is complete, make sure to delete it so that the cluster can scale down and does not consume resources unnecessarily:
+
+```bash
+argo delete @latest -n argo
+```
+
+This will not delete the output files as they were written to a persistent disk, but it removes all the pods on which tasks were running.
+Note that if you run the workflow again, it will overwrite the files of the previous run.
+
 ## Remarks
 
 This is an example workflow for demonstration purposes. To keep it simple, it does not include any error handling or extensive bookkeeping. It is, however, a typical processing task that we envisage CMS open data users to be interested in.
