@@ -18,7 +18,7 @@ keypoints:
 
 Get to your cluster through the [Google Kubernetes Engine page](https://console.cloud.google.com/kubernetes/list/overview?project=crucial-baton-391716) page.
 
-Select the your cluster and connect.
+Select your cluster and connect.
 
 ![](../fig/gke6.png)
 
@@ -68,7 +68,7 @@ Choose one or more of the following challenges:
 > >  Make a fork of the POET repository and modify the configuration file `cloud/analysis.C` for your needs.
 > >  Change the analysis step to your code.
 > >  If you do not intend to change the actual processing, it would be enough to have that file alone in a repository (or any other location) from which you can get it with `wget`.
-> >  Change the runpoet step in the workflow file to clone from your repository.
+> >  Change the analysis step in the workflow file to clone from your repository.
 > {: .solution}
 {: .challenge}
 
