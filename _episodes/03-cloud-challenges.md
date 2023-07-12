@@ -3,7 +3,7 @@ title: "Cloud challenges"
 teaching: 10
 exercises: 60
 questions:
-- "How to adapt the workflow to me needs?"
+- "How to adapt the workflow to my needs?"
 - "How to get my own code in the processing step?"
 - "How to change the resource requests for a workflow step?"
 objectives:
@@ -24,7 +24,7 @@ Select your cluster and connect.
 
 Open the cloud shell. The files that you had in the cloud shell are still available, but you will need to copy the argo executable to the path:
 
-´´´bash
+```bash
 # Move binary to path
 sudo cp ./argo-linux-amd64 /usr/local/bin/argo
 
@@ -40,7 +40,7 @@ Choose one or more of the following challenges:
 > Change the workflow to run over `/SingleElectron/Run2015D-08Jun2016-v1/MINIAOD`
 > 
 > > ## Solution
-> >  Find the dataset and recid
+> >  Find the dataset and identify its `recid`. Use the [search facets](http://opendata.cern.ch/search?page=1&size=20&type=Dataset&subtype=Collision&year=2015&experiment=CMS) to find all MINIAOD collision datasets from 2015.
 > {: .solution}
 {: .challenge}
 
@@ -56,8 +56,8 @@ Choose one or more of the following challenges:
 > Change the processing step to use your own selection
 > 
 > > ## Solution
-> >  Make a fork of the POET repository and modify the configuration file `python/poet_cfg_cloud.py` for your needs.
-> >  Change the runpoet step in the workflow file to clone from your repository.
+> >  - Make a fork of the POET repository and modify the configuration file `python/poet_cfg_cloud.py` for your needs.
+> >  - Change the runpoet step in the workflow file to clone from your repository.
 > {: .solution}
 {: .challenge}
 
@@ -65,9 +65,9 @@ Choose one or more of the following challenges:
 > Change the analysis step to plot different values
 > 
 > > ## Solution
-> >  Make a fork of the POET repository and modify the configuration file `cloud/analysis.C` for your needs.
-> >  Change the analysis step to your code.
-> >  If you do not intend to change the actual processing, it would be enough to have that file alone in a repository (or any other location) from which you can get it with `wget`.
+> >  - Make a fork of the POET repository and modify the configuration file `cloud/analysis.C` for your needs.
+> >  - Change the analysis step to your code.
+> >    - If you do not intend to change the actual processing, it would be enough to have that file alone in a repository (or any other location) from which you can get it with `wget`, it does not need to be a fork from the POET repository.
 > >  Change the analysis step in the workflow file to clone from your repository.
 > {: .solution}
 {: .challenge}
