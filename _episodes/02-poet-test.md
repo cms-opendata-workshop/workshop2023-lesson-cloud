@@ -212,6 +212,12 @@ argo delete @latest -n argo
 This will not delete the output files as they were written to a persistent disk, but it removes all the pods on which tasks were running.
 Note that if you run the workflow again, it will overwrite the files of the previous run.
 
+> ## Warning!
+> [Cloud Shell](https://cloud.google.com/shell/docs) has a usage limit of 50 hours per week. It is not clear if this is per user or per project. To be sure, in order to stay within that limit, please close Cloud Shell as soon as you are done.
+> 
+> If you need more time, please install the [`gcloud` CLI](https://cloud.google.com/sdk/gcloud) locally, and connect to the cluster through it from your local terminal. The connect command is the same that you would use to connect in Cloud Shell.
+{: .callout}
+
 ## Remarks
 
 This is an example workflow for demonstration purposes. To keep it simple, it does not include any error handling or extensive bookkeeping. It is, however, a typical processing task that we envisage CMS open data users to be interested in.
