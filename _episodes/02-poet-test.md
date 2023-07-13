@@ -213,7 +213,7 @@ This will not delete the output files as they were written to a persistent disk,
 Note that if you run the workflow again, it will overwrite the files of the previous run.
 
 > ## Warning!
-> [Cloud Shell](https://cloud.google.com/shell/docs) has a usage limit of 50 hours per week. It is not clear if this is per user or per project. To be sure, in order to stay within that limit, please close Cloud Shell as soon as you are done.
+> [Cloud Shell](https://cloud.google.com/shell/docs) has a usage limit of 50 hours per week. In order to stay within that limit, take the habit of closing Cloud Shell as soon as you are done.
 > 
 > If you need more time, please install the [`gcloud` CLI](https://cloud.google.com/sdk/gcloud) locally, and connect to the cluster through it from your local terminal. The connect command is the same that you would use to connect in Cloud Shell.
 {: .callout}
