@@ -24,15 +24,15 @@ For the persistent disk, we've selected a standard 100 GB disk that costs approx
 
 Uploading ("ingress") and downloading ("egress") data to and from a cloud provider has cost. This appears under "Networking". In our case, these are the costs related to the Argo GUI and the file server through a "load balancer". You can use the [GKE pricing calculator](https://cloud.google.com/products/calculator) to estimate all costs, including download in the Networking Egress tab.
 
-As an example, running over 1M of events (1%) in our chosen dataset took 1 hour 10 mins to run, and the resulting output file, including the full list of [particle flow candidates](https://cms-opendata-workshop.github.io/workshop2023-lesson-advobjects/02-particleflow/index.html), is 4.6 GB.
+As an example of the time and cost, running over 1M of events (1%) in our chosen dataset took 1 hour 10 mins to run, and the resulting output file, including the full list of [particle flow candidates](https://cms-opendata-workshop.github.io/workshop2023-lesson-advobjects/02-particleflow/index.html), is 4.6 GB.
 
 ## Further optimization
 
 ### Resource requests
-A kubernetes resource can have some resource requests in terms of CPU and memory. In our workflow, we requested a certain minimum amount of CPU for the heaviest CMSSW task. This is necessary to make the cluster autoscale, i.e. increase the number of nodes when needed. Much further optimization could be done for the best choice of resource requests and limits.
+A kubernetes resource can have resource requests in terms of CPU and memory. In our workflow, we requested a certain minimum amount of CPU for the heaviest CMSSW task. This is necessary to make the cluster autoscale, i.e. increase the number of nodes when needed. Much further optimization could be done for the best choice of resource requests and limits.
 
 ### Container pull
-Pulling the container from the docker of GitLab image registry takes approximately 6-7 minutes for each job. It would be worth studying whether uploading the container image to the cloud provider's registry makes it faster. The cost of uploading and storing the image would need to be evaluated.
+Pulling the container from the docker or GitLab image registry takes approximately 6-7 minutes for each job. It would be worth studying whether uploading the container image to the cloud provider's registry makes it faster. The cost of uploading and storing the image would need to be evaluated.
 
 ### Data upload
 We have not estimated whether it would be convenient to upload the data to the cloud provider's disk. It will certainly make the data access for processing faster, but the cost to upload ("ingress") and host some TB of input data needs to be taken into account. 
