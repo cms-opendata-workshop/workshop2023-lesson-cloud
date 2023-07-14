@@ -14,7 +14,7 @@ keypoints:
 We have run through an example of CMS open data processing on public cloud resources. Now it is time for some preliminary considerations on costs. 
 
 ## Cost and time
-The charges in cloud computing come from the cluster, disk space, and networking. They are based on the time that resources are available and/or on their size. An example of billing details for some days of testing:
+The charges in cloud computing come from the cluster, disk space, and networking. They are based on the time that resources are available and/or on their size. An example of billing details covering the preparations and the first cloud tutorial session:
 
 <img src="../fig/billing.png" alt="Billing details" width="550" />
 
